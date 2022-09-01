@@ -1,6 +1,6 @@
 import { Construct } from "constructs";
 import { TerraformResourceLifecycle, TerraformStack } from "cdktf";
-import { Route53Record, Route53Zone, Route53ZoneConfig } from "@cdktf/provider-aws/lib/route53";
+import { DataAwsRoute53Zone, DataAwsRoute53ZoneConfig, Route53Record } from "@cdktf/provider-aws/lib/route53";
 import { AcmCertificate, AcmCertificateConfig, AcmCertificateValidation } from "@cdktf/provider-aws/lib/acm";
 import { DEFAULTS, DOMAINS } from "@/config";
 import { buildAWSProvider } from "@/lib/providers"
@@ -15,7 +15,7 @@ export class CertificatesStack extends TerraformStack {
 		buildAWSProvider(this, "certificates");
 
     DOMAINS.forEach((domainName: string) => {
-      const hostedZone = new Route53Zone(this, `${domainName}-hostedZone`, <Route53ZoneConfig>{
+      const hostedZone = new DataAwsRoute53Zone(this, `${domainName}-hostedZone`, <DataAwsRoute53ZoneConfig>{
         name: domainName
       });
   
