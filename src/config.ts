@@ -4,6 +4,7 @@ export const DEFAULTS = {
 }
 
 export const AWS = {
+	administrativeRegion: "us-east-1",
 	region: process.env.AWS_REGION || "us-east-1"
 }
 
