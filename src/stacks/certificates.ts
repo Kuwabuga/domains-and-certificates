@@ -10,9 +10,9 @@ export class CertificatesStack extends TerraformStack {
 	constructor(scope: Construct, name: string) {
     super(scope, name);
 
-    buildS3Backend(this);
+    buildS3Backend(this, "certificates");
 
-		buildAWSProvider(this, "domains");
+		buildAWSProvider(this, "certificates");
 
     DOMAINS.forEach((domainName: string) => {
       const hostedZone = new Route53Zone(this, `${domainName}-hostedZone`, <Route53ZoneConfig>{

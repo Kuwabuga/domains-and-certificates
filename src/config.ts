@@ -9,7 +9,7 @@ export const AWS = {
 
 export const BACKEND = {
 	bucket: process.env.AWS_TERRAFORM_BUCKET,
-	key: `${process.env.SERVICE_NAME}/state.tf`,
+	baseKey: `${process.env.SERVICE_NAME}`,
 	region: AWS.region,
 	acl: "bucket-owner-full-control"
 }
