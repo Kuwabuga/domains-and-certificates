@@ -9,7 +9,7 @@ export class DomainsStack extends TerraformStack {
 	constructor(scope: Construct, name: string) {
 		super(scope, name);
 
-		buildS3Backend(this);
+		buildS3Backend(this, "domains");
 
 		buildAWSProvider(this, "domains");
 
