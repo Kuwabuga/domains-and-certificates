@@ -105,3 +105,15 @@ dist
 
 # VS Code
 .vscode
+
+# TFCDK
+*.d.ts
+*.js
+cdktf.out
+cdktf.log
+*terraform.*.tfstate*
+.gen
+.terraform
+tsconfig.tsbuildinfo
+!jest.config.js
+!setup.js

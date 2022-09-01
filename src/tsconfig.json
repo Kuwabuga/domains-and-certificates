@@ -25,6 +25,7 @@
     "target": "ES2018",
     "incremental": true,
     "skipLibCheck": true,
+    "baseUrl": "../",
     "paths": {
       "@/*": ["./src/*"]
     }
