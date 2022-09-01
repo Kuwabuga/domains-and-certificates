@@ -13,7 +13,7 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
       
-      - name: Install Node 16
+      - name: Install Node
         uses: actions/setup-node@v2
         with:
           node-version: "16"
@@ -25,7 +25,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region:  ${{ secrets.AWS_REGION }}
 
-      - name: Install Terraform CDK & dependencies
+      - name: Install Terraform CDK
+        run: npm install --global cdktf-cli@0.12.2
+
+      - name: Install dependencies
         working-directory: ${{ env.INFRASTRUCTURE_DIRECTORY }}
         run: npm install
 
