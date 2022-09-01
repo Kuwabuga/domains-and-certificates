@@ -1,4 +1,4 @@
-name: Deploy
+name: Setup domains in Route53
 
 on: workflow_dispatch
 
@@ -42,4 +42,4 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           AWS_TERRAFORM_BUCKET: ${{ secrets.AWS_TERRAFORM_BUCKET }}
           SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
-        run: cdktf deploy --auto-approve
+        run: cdktf deploy domains-stack --auto-approve
