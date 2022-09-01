@@ -21,13 +21,13 @@ export class CertificatesStack extends TerraformStack {
         name: domainName
       });
 
-      this.buildValidationResources(hostedZone, us);
-      this.buildValidationResources(hostedZone, europe);
+      this.buildValidationResources(domainName, AWS.administrativeRegion, hostedZone, us);
+      this.buildValidationResources(domainName, AWS.region, hostedZone, europe);
     })
   }
 
-  buildValidationResources(hostedZone: DataAwsRoute53Zone, provider: AwsProvider): void {
-    const certificate = new AcmCertificate(this, `${hostedZone.name}-${provider.region}-certificate`, 
+  buildValidationResources(domainName: string, region: string, hostedZone: DataAwsRoute53Zone, provider: AwsProvider): void {
+    const certificate = new AcmCertificate(this, `${domainName}-${region}-certificate`, 
       <AcmCertificateConfig>{
         domainName: hostedZone.name,
         subjectAlternativeNames: [`*.${hostedZone.name}`],
@@ -40,7 +40,7 @@ export class CertificatesStack extends TerraformStack {
       }
     );
 
-    const recordValidation = new Route53Record(this, `${hostedZone.name}-${provider.region}-certificate-record`, 
+    const recordValidation = new Route53Record(this, `${domainName}-${region}-certificate-record`, 
       <Route53RecordConfig>{
         zoneId: hostedZone.zoneId,
         allowOverwrite: true,
@@ -60,8 +60,8 @@ export class CertificatesStack extends TerraformStack {
         }
       }}`,
     );
-    
-    const certificateValidation = new AcmCertificateValidation(this, `${hostedZone.name}-${provider.region}-certificate-validation`, 
+
+    const certificateValidation = new AcmCertificateValidation(this, `${domainName}-${region}-certificate-validation`, 
       <AcmCertificateValidationConfig>{
         certificateArn: certificate.arn,
         provider: provider
