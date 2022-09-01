@@ -9,7 +9,7 @@ class DomainsCertificatesStack extends TerraformStack {
   constructor(scope: Construct, name: string) {
     super(scope, name);
 
-    new S3Backend(scope, <S3BackendProps>{
+    new S3Backend(this, <S3BackendProps>{
       bucket: BACKEND.bucket,
       key: BACKEND.key,
       region: BACKEND.region,
@@ -21,12 +21,12 @@ class DomainsCertificatesStack extends TerraformStack {
     });
 
     DOMAINS.forEach((domainName: string) => {
-      const hostedZone = new Route53Zone(scope, `${domainName}-hostedZone`, <Route53ZoneConfig>{
+      const hostedZone = new Route53Zone(this, `${domainName}-hostedZone`, <Route53ZoneConfig>{
         name: domainName,
         comment: DEFAULTS.comment
       });
   
-      const certificate = new AcmCertificate(scope, `${domainName}-certificate`, <AcmCertificateConfig>{
+      const certificate = new AcmCertificate(this, `${domainName}-certificate`, <AcmCertificateConfig>{
         domainName: hostedZone.name,
         subjectAlternativeNames: [`*.${hostedZone.name}`],
         validationMethod: "DNS",
