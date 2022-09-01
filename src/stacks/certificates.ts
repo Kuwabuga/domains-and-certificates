@@ -60,7 +60,7 @@ export class CertificatesStack extends TerraformStack {
         }
       }}`,
     );
-    
+
     const certificateValidation = new AcmCertificateValidation(this, `${domainName}-${region}-certificate-validation`, 
       <AcmCertificateValidationConfig>{
         certificateArn: certificate.arn,
