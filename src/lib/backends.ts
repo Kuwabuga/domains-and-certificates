@@ -3,10 +3,10 @@ import { S3Backend, S3BackendProps } from "cdktf";
 import { BACKEND } from "@/config";
 
 export const buildS3Backend = (scope: Construct, fileName: string): S3Backend => {
-	return new S3Backend(scope, <S3BackendProps>{
-		bucket: BACKEND.bucket,
-		key: `${BACKEND.baseKey}/${fileName}.tf`,
-		region: BACKEND.region,
-		acl: BACKEND.acl
-	});
-}
+  return new S3Backend(scope, <S3BackendProps>{
+    bucket: BACKEND.bucket,
+    key: `${BACKEND.baseKey}/${fileName}.tf`,
+    region: BACKEND.region,
+    acl: BACKEND.acl
+  });
+};

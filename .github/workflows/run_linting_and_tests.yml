@@ -1,4 +1,4 @@
-name: Run Unit Tests
+name: Run Linting and Unit Tests
 
 on:
   push:
@@ -27,6 +27,10 @@ jobs:
       - name: Install dependencies
         working-directory: ${{ env.INFRASTRUCTURE_DIRECTORY }}
         run: npm install
+
+      - name: Run ESLint
+        working-directory: ${{ env.INFRASTRUCTURE_DIRECTORY }}
+        run: npm run lint
 
       - name: Run Terraform CDK Unit Tests
         working-directory: ${{ env.INFRASTRUCTURE_DIRECTORY }}
