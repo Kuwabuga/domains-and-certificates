@@ -32,10 +32,6 @@ jobs:
         working-directory: ${{ env.INFRASTRUCTURE_DIRECTORY }}
         run: npm install
 
-      - name: Run Terraform CDK Unit Tests
-        working-directory: ${{ env.INFRASTRUCTURE_DIRECTORY }}
-        run: npm run test
-
       - name: Deploy with Terraform CDK
         working-directory: ${{ env.INFRASTRUCTURE_DIRECTORY }}
         env:
