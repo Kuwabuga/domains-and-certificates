@@ -1,4 +1,4 @@
-name: Setup domains in Route53
+name: Setup parameters in Parameter Store
 
 on: workflow_dispatch
 
@@ -7,18 +7,9 @@ env:
 
 jobs:
   deploy:
-    name: Validate & Deploy Terraform
+    name: Create parameters in Parameter Store
     runs-on: ubuntu-latest
     steps:
-      - name: Set environment
-        run: |
-          case ${GITHUB_REF##*/} in
-            "production") echo "ENVIRONMENT=production" >> $GITHUB_ENV ;;
-            "preprod") echo "ENVIRONMENT=preprod" >> $GITHUB_ENV ;;
-            "qa") echo "ENVIRONMENT=qa" >> $GITHUB_ENV ;;
-            *) echo "ENVIRONMENT=development" >> $GITHUB_ENV ;;
-          esac
-
       - name: Checkout Repo
         uses: actions/checkout@v2
       

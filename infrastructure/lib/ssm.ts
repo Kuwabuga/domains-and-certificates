@@ -1,9 +1,9 @@
 import { Construct } from "constructs";
 import { DataAwsSsmParameter, DataAwsSsmParameterConfig, SsmParameter, SsmParameterConfig } from "@cdktf/provider-aws/lib/ssm";
-import { ENVIRONMENT, SERVICE_NAME } from "@/config";
+import { SERVICE_NAME } from "@/config";
 
-const regionsParameter = `/${ENVIRONMENT}/${SERVICE_NAME}/regions`;
-const domainsParameter = `/${ENVIRONMENT}/${SERVICE_NAME}/domains`;
+const regionsParameter = `/${SERVICE_NAME}/regions`;
+const domainsParameter = `/${SERVICE_NAME}/domains`;
 
 export const createRegionsParameter = (scope: Construct, id = "regions"): SsmParameter => {
   return new SsmParameter(scope, `${id}-list-parameter`, <SsmParameterConfig>{
