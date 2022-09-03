@@ -6,7 +6,7 @@ on:
         - "**"
 
 env:
-  INFRASTRUCTURE_DIRECTORY: "./src"
+  INFRASTRUCTURE_DIRECTORY: "./infrastructure"
 
 jobs:
   deploy:
