@@ -3,7 +3,7 @@ name: Setup & validate certificates using ACM
 on: workflow_dispatch
 
 env:
-  INFRASTRUCTURE_DIRECTORY: "./src"
+  INFRASTRUCTURE_DIRECTORY: "./infrastructure"
 
 jobs:
   deploy:

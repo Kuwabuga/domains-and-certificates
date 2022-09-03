@@ -10,6 +10,15 @@ jobs:
     name: Validate & Deploy Terraform
     runs-on: ubuntu-latest
     steps:
+      - name: Set environment
+        run: |
+          case ${GITHUB_REF##*/} in
+            "production") echo "ENVIRONMENT=production" >> $GITHUB_ENV ;;
+            "preprod") echo "ENVIRONMENT=preprod" >> $GITHUB_ENV ;;
+            "qa") echo "ENVIRONMENT=qa" >> $GITHUB_ENV ;;
+            *) echo "ENVIRONMENT=development" >> $GITHUB_ENV ;;
+          esac
+
       - name: Checkout Repo
         uses: actions/checkout@v2
       
@@ -38,4 +47,4 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           AWS_TERRAFORM_BUCKET: ${{ secrets.AWS_TERRAFORM_BUCKET }}
           SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
-        run: cdktf deploy domains-stack --auto-approve
+        run: cdktf deploy parameters-stack --auto-approve
