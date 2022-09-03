@@ -22,7 +22,7 @@ export class CertificatesStack extends TerraformStack {
     });
 
     domains.forEach((domainName: string) => {
-      const hostedZone = getHostedZone(scope, domainName);
+      const hostedZone = getHostedZone(this, domainName);
       providers.forEach((provider, index) => {
         const id = `${domainName}-${index}`;
         const certificate = createCertificate(this, id, hostedZone, provider);
