@@ -12,7 +12,7 @@ export class DomainsStack extends TerraformStack {
     buildS3Backend(this, "domains");
     buildAWSProvider(this);
 
-    const domains = getDomainsParameter(scope);
+    const domains = getDomainsParameter(this);
     domains.forEach((domainName: string) => {
       createHostedZone(this, domainName);
     });
