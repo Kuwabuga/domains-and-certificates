@@ -4,15 +4,15 @@ import { DataAwsRoute53Zone, DataAwsRoute53ZoneConfig, Route53Record, Route53Rec
 import { AcmCertificate } from "@cdktf/provider-aws/lib/acm";
 import { DEFAULTS } from "@/config";
 
-export const createHostedZone = (scope: Construct, domainName: string): Route53Zone => {
-  return new Route53Zone(scope, `${domainName}-hostedZone`, <Route53ZoneConfig>{
+export const createHostedZone = (scope: Construct, id = "default", domainName: string): Route53Zone => {
+  return new Route53Zone(scope, `${id}-hostedZone`, <Route53ZoneConfig>{
     name: domainName,
     comment: DEFAULTS.comment
   });
 };
 
-export const getHostedZone = (scope: Construct, domainName: string): DataAwsRoute53Zone => {
-  return new DataAwsRoute53Zone(scope, `${domainName}-hostedZone`, <DataAwsRoute53ZoneConfig>{
+export const getHostedZone = (scope: Construct, id = "default", domainName: string): DataAwsRoute53Zone => {
+  return new DataAwsRoute53Zone(scope, `${id}-hostedZone`, <DataAwsRoute53ZoneConfig>{
     name: domainName
   });
 };

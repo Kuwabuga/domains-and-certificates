@@ -13,8 +13,8 @@ export class DomainsStack extends TerraformStack {
     buildAWSProvider(this);
 
     const domains = getDomainsParameter(this);
-    domains.forEach((domainName: string) => {
-      createHostedZone(this, domainName);
+    domains.forEach((domainName, index) => {
+      createHostedZone(this, `${index}`, domainName);
     });
   }
 }
