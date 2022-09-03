@@ -12,11 +12,12 @@ export class CertificatesStack extends TerraformStack {
     super(scope, name);
 
     buildS3Backend(this, "certificates");
+    buildAWSProvider(this);
 
     const regions = getRegionsParameter(this);
     const domains = getDomainsParameter(this);
-    const providers: AwsProvider[] = [];
 
+    const providers: AwsProvider[] = [];
     regions.forEach((region, index) => {
       providers.push(buildAWSProvider(this, `${index}`, region));
     });
