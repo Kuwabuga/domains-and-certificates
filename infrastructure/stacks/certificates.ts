@@ -17,8 +17,8 @@ export class CertificatesStack extends TerraformStack {
     const domains = getDomainsParameter(this);
     const providers: AwsProvider[] = [];
 
-    regions.forEach(region => {
-      providers.push(buildAWSProvider(this, region));
+    regions.forEach((region, index) => {
+      providers.push(buildAWSProvider(this, `${index}`, region));
     });
 
     domains.forEach((domainName, index) => {
