@@ -5,14 +5,14 @@ import { AcmCertificate } from "@cdktf/provider-aws/lib/acm";
 import { DEFAULTS } from "@/config";
 
 export const createHostedZone = (scope: Construct, id = "default", domainName: string): Route53Zone => {
-  return new Route53Zone(scope, `${id}-hostedZone`, <Route53ZoneConfig>{
+  return new Route53Zone(scope, `route53-${id}-hostedZone`, <Route53ZoneConfig>{
     name: domainName,
     comment: DEFAULTS.comment
   });
 };
 
 export const getHostedZone = (scope: Construct, id = "default", domainName: string): DataAwsRoute53Zone => {
-  return new DataAwsRoute53Zone(scope, `${id}-hostedZone`, <DataAwsRoute53ZoneConfig>{
+  return new DataAwsRoute53Zone(scope, `route53-${id}-data-hostedZone`, <DataAwsRoute53ZoneConfig>{
     name: domainName
   });
 };
@@ -24,7 +24,7 @@ export const validateRecord = (
   certificate: AcmCertificate, 
   provider: AwsProvider | undefined = undefined
 ): Route53Record => {
-  const recordValidation = new Route53Record(scope, `${id}-record-validation`, <Route53RecordConfig>{
+  const recordValidation = new Route53Record(scope, `route53-${id}-record-validation`, <Route53RecordConfig>{
       	zoneId: hostedZone.zoneId,
       	allowOverwrite: true,
       	name: "${each.value.name}",

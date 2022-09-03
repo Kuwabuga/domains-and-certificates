@@ -11,7 +11,7 @@ export const createCertificate = (
   hostedZone: DataAwsRoute53Zone, 
   provider: AwsProvider | undefined = undefined
 ): AcmCertificate => {
-  return new AcmCertificate(scope, `${id}-certificate`, <AcmCertificateConfig>{
+  return new AcmCertificate(scope, `acm-${id}-certificate`, <AcmCertificateConfig>{
     domainName: hostedZone.name,
     subjectAlternativeNames: [`*.${hostedZone.name}`],
     validationMethod: "DNS",
@@ -30,7 +30,7 @@ export const validateCertificate = (
   recordValidation: Route53Record,
   provider: AwsProvider | undefined = undefined
 ): AcmCertificateValidation => {
-  const certificateValidation = new AcmCertificateValidation(scope, `${id}-certificate-validation`, 
+  const certificateValidation = new AcmCertificateValidation(scope, `acm-${id}-certificate-validation`, 
       <AcmCertificateValidationConfig>{
       	certificateArn: certificate.arn,
       	provider: provider
