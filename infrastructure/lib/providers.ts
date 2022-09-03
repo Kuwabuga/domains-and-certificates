@@ -4,7 +4,7 @@ import { AWS_REGION } from "@/config";
 
 export const buildAWSProvider = (scope: Construct, id = "default", region = AWS_REGION) => {
   let alias = region;
-  if (id=="default") {
+  if (id == "default") {
     alias = undefined;
   }
 
