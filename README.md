@@ -1,8 +1,6 @@
 # Domains and Certificates
 
-## AWS Region
-
-eu-west-1
+Current default provider AWS region: eu-west-1
 
 ## Current status
 [![Linting and Unit Tests](https://github.com/Kuwabuga/domains-and-certificates/actions/workflows/run_linting_and_tests.yml/badge.svg?branch=production)](https://github.com/Kuwabuga/domains-and-certificates/actions/workflows/run_linting_and_tests.yml)<br>
