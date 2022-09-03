@@ -7,7 +7,7 @@ import { DEFAULTS } from "@/config";
 
 export const createCertificate = (
   scope: Construct, 
-  id = "", 
+  id = "default", 
   hostedZone: DataAwsRoute53Zone, 
   provider: AwsProvider | undefined = undefined
 ): AcmCertificate => {
@@ -25,7 +25,7 @@ export const createCertificate = (
 
 export const validateCertificate = (
   scope: Construct,
-  id = "",
+  id = "default",
   certificate: AcmCertificate,
   recordValidation: Route53Record,
   provider: AwsProvider | undefined = undefined
