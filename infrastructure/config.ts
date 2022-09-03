@@ -1,4 +1,4 @@
-export const AWS_REGION = process.env.AWS_REGION;
+export const AWS_REGION = process.env.AWS_REGION || "eu-west-1";
 export const AWS_TERRAFORM_BUCKET = process.env.AWS_TERRAFORM_BUCKET;
 export const SERVICE_NAME = process.env.SERVICE_NAME;
 

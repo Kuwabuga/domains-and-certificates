@@ -6,18 +6,24 @@ import { buildAWSProvider } from "@/lib/providers";
 import { getRegionsParameter, getDomainsParameter } from "@/lib/ssm";
 import { getHostedZone, validateRecord } from "@/lib/route53";
 import { createCertificate, validateCertificate } from "@/lib/acm";
+import { AWS_REGION } from "@/config";
 
 export class CertificatesStack extends TerraformStack {
   constructor(scope: Construct, name: string) {
     super(scope, name);
 
     buildS3Backend(this, "certificates");
-    buildAWSProvider(this);
+    const defaultProvider = buildAWSProvider(this);
 
-    const regions = getRegionsParameter(this);
+    let regions = getRegionsParameter(this);
     const domains = getDomainsParameter(this);
 
     const providers: AwsProvider[] = [];
+    if (regions.includes(AWS_REGION)) {
+      regions = regions.filter(region => region !== AWS_REGION);
+      providers.push(defaultProvider);
+    }
+
     regions.forEach((region, index) => {
       providers.push(buildAWSProvider(this, `${index}`, region));
     });
