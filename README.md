@@ -1,5 +1,9 @@
 # Domains and Certificates
 
+## AWS Region
+
+eu-west-1
+
 ## Current status
 [![Linting and Unit Tests](https://github.com/Kuwabuga/domains-and-certificates/actions/workflows/run_linting_and_tests.yml/badge.svg?branch=production)](https://github.com/Kuwabuga/domains-and-certificates/actions/workflows/run_linting_and_tests.yml)<br>
 [![Setup domains in Route53](https://github.com/Kuwabuga/domains-and-certificates/actions/workflows/setup_domains.yml/badge.svg?branch=production)](https://github.com/Kuwabuga/domains-and-certificates/actions/workflows/setup_domains.yml)<br>
