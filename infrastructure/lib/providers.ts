@@ -4,7 +4,6 @@ import { AWS_REGION } from "@/config";
 
 export const buildAWSProvider = (scope: Construct, id = "default", region = AWS_REGION) => {
   return new AwsProvider(scope, `aws-${id}-provider`, {
-    region: region,
-    alias: region
+    region: region
   });
 };
