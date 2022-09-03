@@ -6,7 +6,7 @@ const regionsParameter = `/${SERVICE_NAME}/regions`;
 const domainsParameter = `/${SERVICE_NAME}/domains`;
 
 export const createRegionsParameter = (scope: Construct, id = "regions"): SsmParameter => {
-  return new SsmParameter(scope, `${id}-list-parameter`, <SsmParameterConfig>{
+  return new SsmParameter(scope, `ssm-${id}-list-parameter`, <SsmParameterConfig>{
     name: regionsParameter,
     description: "List of regions to create a certificate for each domain on Route53",
     type: "StringList",
@@ -15,7 +15,7 @@ export const createRegionsParameter = (scope: Construct, id = "regions"): SsmPar
 };
 
 export const createDomainsParameter = (scope: Construct, id = "domains"): SsmParameter => {
-  return new SsmParameter(scope, `${id}-list-parameter`, <SsmParameterConfig>{
+  return new SsmParameter(scope, `ssm-${id}-list-parameter`, <SsmParameterConfig>{
     name: domainsParameter,
     description: "List of domains ro create on Route53",
     type: "StringList",
@@ -24,14 +24,14 @@ export const createDomainsParameter = (scope: Construct, id = "domains"): SsmPar
 };
 
 export const getRegionsParameter = (scope: Construct, id = "regions"): string[] => {
-  const domains = new DataAwsSsmParameter(scope, `${id}-list-parameter`, <DataAwsSsmParameterConfig>{
+  const domains = new DataAwsSsmParameter(scope, `ssm-${id}-data-list-parameter`, <DataAwsSsmParameterConfig>{
     name: regionsParameter
   });
   return domains.value.replace(" ", "").split(",");
 };
 
 export const getDomainsParameter = (scope: Construct, id = "domains"): string[] => {
-  const domains = new DataAwsSsmParameter(scope, `${id}-list-parameter`, <DataAwsSsmParameterConfig>{
+  const domains = new DataAwsSsmParameter(scope, `ssm-${id}-data-list-parameter`, <DataAwsSsmParameterConfig>{
     name: domainsParameter
   });
   return domains.value.replace(" ", "").split(",");
