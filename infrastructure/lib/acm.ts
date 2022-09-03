@@ -7,11 +7,11 @@ import { DEFAULTS } from "@/config";
 
 export const createCertificate = (
   scope: Construct, 
-  id = "default", 
+  id = "default-certificate", 
   hostedZone: DataAwsRoute53Zone, 
   provider: AwsProvider | undefined = undefined
 ): AcmCertificate => {
-  return new AcmCertificate(scope, `acm-${id}-certificate`, <AcmCertificateConfig>{
+  return new AcmCertificate(scope, id, <AcmCertificateConfig>{
     domainName: hostedZone.name,
     subjectAlternativeNames: [`*.${hostedZone.name}`],
     validationMethod: "DNS",
@@ -25,17 +25,15 @@ export const createCertificate = (
 
 export const validateCertificate = (
   scope: Construct,
-  id = "default",
+  id = "default-certificate-validation",
   certificate: AcmCertificate,
   recordValidation: Route53Record,
   provider: AwsProvider | undefined = undefined
 ): AcmCertificateValidation => {
-  const certificateValidation = new AcmCertificateValidation(scope, `acm-${id}-certificate-validation`, 
-      <AcmCertificateValidationConfig>{
-      	certificateArn: certificate.arn,
-      	provider: provider
-      }
-  );
+  const certificateValidation = new AcmCertificateValidation(scope, id, <AcmCertificateValidationConfig>{
+    certificateArn: certificate.arn,
+    provider: provider
+  });
   certificateValidation.addOverride("validation_record_fqdns", `\${[for record in aws_route53_record.${recordValidation.friendlyUniqueId} : record.fqdn]}`);
   return certificateValidation;
 };
